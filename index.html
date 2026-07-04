@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuheena's Physio & Sports Clinic</title>
+  <style>
+    /* Safe & Premium Clinical Color Scheme */
+    :root {
+      --primary-blue: #0a4b7c;
+      --medical-teal: #00a896;
+      --bg-clean: #ffffff;
+      --bg-soft: #f8f9fa;
+      --text-dark: #2b2d42;
+      --text-light: #6c757d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-clean);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Header Navigation */
+    header {
+      background: var(--bg-clean);
+      padding: 15px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-area h1 {
+      font-size: 20px;
+      color: var(--primary-blue);
+      font-weight: 700;
+    }
+
+    .contact-btn {
+      background: var(--medical-teal);
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    /* Hero Slider Banner Section */
+    .hero-slider {
+      position: relative;
+      width: 100%;
+      height: 70vh;
+      min-height: 400px;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      filter: brightness(60%);
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      width: 90%;
+      max-width: 800px;
+      z-index: 10;
+    }
+
+    .hero-content h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    .hero-btn {
+      background: var(--medical-teal);
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    /* Interactive Appointment Booking Section */
+    .booking-section {
+      padding: 60px 20px;
+      background: var(--bg-soft);
+      text-align: center;
+    }
+
+    .booking-container {
+      max-width: 550px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      text-align: left;
+    }
+
+    .booking-container h3 {
+      color: var(--primary-blue);
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 22px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 15px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--primary-blue);
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: #063357;
+    }
+
+    /* Google Reviews Carousel Section */
+    .reviews-section {
+      padding: 60px 20px;
+      background: var(--bg-clean);
+      text-align: center;
+    }
+
+    .reviews-section h3 {
+      color: var(--primary-blue);
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .reviews-slider {
+      position: relative;
+      max-width: 650px;
+      margin: 0 auto;
+      min-height: 220px;
+      background: var(--bg-soft);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .review-slide {
+      display: none;
+    }
+
+    .review-slide.active {
+      display: block;
+    }
+
+    .stars {
+      color: #ffb703;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .review-text {
+      font-style: italic;
+      color: var(--text-dark);
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+
+    .review-author {
+      font-weight: 700;
+      color: var(--primary-blue);
+      font-size: 14px;
+    }
+
+    .google-link-btn {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--medical-teal);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    /* Footer & Location Section */
+    footer {
+      background: var(--primary-blue);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .footer-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .clinic-info h4 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .clinic-info p {
+      font-size: 14px;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+    }
+
+    .map-container {
+      width: 100%;
+      height: 250px;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Mobile Responsive Design Media Queries */
+    @media (max-width: 768px) {
+      .hero-content h2 { font-size: 24px; }
+      .hero-content p { font-size: 15px; }
+      .hero-slider { height: 60vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div class="logo-area">
+      <h1>Tuheena's Physio & Sports Clinic</h1>
+    </div>
+    <a href="tel:+918054799156" class="contact-btn">Call Clinic</a>
+  </header>
+
+  <!-- Hero Slider Banner Section (Rotates every 3 seconds) -->
+  <section class="hero-slider">
+    <img src="Consultation Desk.png" class="slide active" alt="Consultation Area">
+    <img src="Doctor Examination.png" class="slide" alt="Patient Assessment">
+    <img src="Parallel Bars Infrastructure.png" class="slide" alt="Clinic Equipment">
+    <img src="Sports Rehab.png" class="slide" alt="Rehabilitation Gym Floor">
+    <img src="Physiotherapy Banner.png" class="slide" alt="Manual Sports Therapy">
+    <img src="Blue Yoga Mat Stretch.png" class="slide" alt="Core Exercises">
+    <img src="Balancing Rail Exercise.png" class="slide" alt="Mobility Training">
+
+    <div class="hero-content">
+      <h2>Advanced Sports Rehab & Physiotherapy Care</h2>
+      <p>Eliminate pain, restore structural mobility, and maximize physical athletic execution with elite specialist care.</p>
+      <a href="#book-now" class="hero-btn">Book Digital Appointment</a>
+    </div>
+  </section>
+
+  <!-- Form Section -->
+  <section class="booking-section" id="book-now">
+    <div class="booking-container">
+      <h3>Book Your Appointment</h3>
+      <form id="appointmentForm">
+        <div class="form-group">
+          <label for="name">Patient Full Name *</label>
+          <input type="text" id="name" required placeholder="Enter your full name">
+        </div>
+        <div class="form-group">
+          <label for="phone">Mobile Number *</label>
+          <input type="tel" id="phone" required placeholder="Enter mobile number">
+        </div>
+        <div class="form-group">
+          <label for="symptoms">Symptoms / Injury Details</label>
+          <textarea id="symptoms" rows="3" placeholder="Describe your pain area or condition"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Submit via WhatsApp</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Google Reviews Content (Cycles every 5 seconds) -->
+  <section class="reviews-section">
+    <h3>Real Patient Stories</h3>
+    <div class="reviews-slider">
+      
+      <!-- Review 1 -->
+      <div class="review-slide active">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"After a lot of research and consultations with several doctors, I feel incredibly grateful to have found this place. The entire team is highly knowledgeable, professional, and genuinely caring. I have noticed a significant improvement in my knee flexibility and overall mobility..."</p>
+        <p class="review-author">— shruthi kolluru</p>
+      </div>
+      
+      <!-- Review 2 -->
+      <div class="review-slide">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Tuheena Ma'am took the time to thoroughly understand my daughter's condition, guided us in the right direction at the right time, and genuinely cared about her well-being. We are extremely grateful for her support, professionalism, and dedication."</p>
+        <p class="review-author">— naga sushma</p>
+      </div>
+      
+      <!-- Review 3 -->
+      <div class="review-slide">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"I met Dr. Tuheena for my postoperative Physiotherapy treatment to my Rotatory Cuff Surgery. She is well experienced in her treatment methods. His way of treatment is excellent and I can see the difference in the range of movement in my hand."</p>
+        <p class="review-author">— SRIKANTH BATHINI</p>
+      </div>
+
+      <a href="https://www.google.com/maps?cid=16691629858349179881" target="_blank" class="google-link-btn">
+        ➔ Click to Read Full Verified Google Reviews
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer Map & Contact Block -->
+  <footer>
+    <div class="footer-container">
+      <div class="clinic-info">
+        <h4>Tuheena's Physio & Sports Clinic</h4>
+        <p>📍 603B, 6th Floor, Sahithi S, 8-3-1010, Srinagar Colony Main Rd, Hyderabad, Telangana 500073</p>
+        <p>📞 Contact: +91 80547 99156 | Timing: 9:00 AM - 8:00 PM</p>
+      </div>
+
+      <!-- Live Location Map Layout -->
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.8244976451664!2d78.43128917596767!3d17.420216501484192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb90ca36e6eb1f%3A0xe7a505f7783ff3e9!2sSrinagar%20Colony%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1719830500000" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Automation Automation Engines -->
+  <script>
+    // 1. Automatic Hero Image Slider Logic (3000ms Loop)
+    let currentHeroIndex = 0;
+    const heroSlides = document.querySelectorAll('.hero-slider .slide');
+    
+    function changeHeroSlide() {
+      heroSlides[currentHeroIndex].classList.remove('active');
+      currentHeroIndex = (currentHeroIndex + 1) % heroSlides.length;
+      heroSlides[currentHeroIndex].classList.add('active');
+    }
+    setInterval(changeHeroSlide, 3000);
+
+    // 2. Google Reviews Carousel Logic (5000ms Loop)
+    let currentReviewIndex = 0;
+    const reviewSlides = document.querySelectorAll('.review-slide');
+    
+    function changeReviewSlide() {
+      reviewSlides[currentReviewIndex].classList.remove('active');
+      currentReviewIndex = (currentReviewIndex + 1) % reviewSlides.length;
+      reviewSlides[currentReviewIndex].classList.add('active');
+    }
+    setInterval(changeReviewSlide, 5000);
+
+    // 3. Dynamic WhatsApp Lead Generation Form Function
+    document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const symptoms = document.getElementById('symptoms').value;
+      
+      const whatsappText = `Hello Tuheena's Physio & Sports Clinic, I would like to book an appointment.%0A%0A*Patient Name:* ${name}%0A*Contact Phone:* ${phone}%0A*Symptoms:* ${symptoms}`;
+      window.open(`https://wa.me/918054799156?text=${whatsappText}`, '_blank');
+    });
+  </script>
+</body>
+</html>
+
